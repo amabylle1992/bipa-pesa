@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seu Comprovante Bipa&Pesa</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bipa: {
+              brand: '#0d382c',
+              dark: '#0a231c',
+              brightGreen: '#4ade80',
+              cyan: '#06b6d4',
+              yellow: '#eab308'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-bipa-dark min-h-screen text-white flex flex-col justify-between p-4 font-sans">
+
+  <div class="max-w-sm mx-auto w-full my-auto text-center space-y-6">
+    
+    <!-- Logo -->
+    <div class="flex justify-center items-center gap-2">
+      <i class="fa-solid fa-robot text-bipa-brightGreen text-3xl"></i>
+      <span class="text-2xl font-black">Bipa<span class="text-bipa-cyan">&</span><span class="text-bipa-brightGreen">Pesa</span></span>
+    </div>
+
+    <!-- Card de Comprovativo -->
+    <div class="bg-gradient-to-b from-emerald-950 to-bipa-dark border-2 border-bipa-brightGreen rounded-3xl p-6 shadow-2xl text-left relative overflow-hidden">
+      
+      <div class="flex justify-between items-center border-b border-white/10 pb-3 mb-4">
+        <span class="text-[10px] font-extrabold uppercase text-bipa-cyan tracking-widest">Comprovante de Reciclagem</span>
+        <i class="fa-solid fa-circle-check text-bipa-brightGreen text-lg"></i>
+      </div>
+
+      <p class="text-xs text-gray-300">Cliente:</p>
+      <h1 class="text-2xl font-black text-white mb-4" id="clienteNome">Carregando...</h1>
+
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-4 space-y-3 mb-4">
+        <div class="flex justify-between text-xs">
+          <span class="text-gray-400">Material Pesado:</span>
+          <span class="font-bold text-white" id="materialNome">--</span>
+        </div>
+        <div class="flex justify-between text-xs">
+          <span class="text-gray-400">Peso Total:</span>
+          <span class="font-bold text-bipa-brightGreen" id="pesoTotal">-- kg</span>
+        </div>
+      </div>
+
+      <div class="bg-black/40 border border-bipa-yellow/40 rounded-2xl p-4 text-center">
+        <span class="text-[10px] uppercase font-bold text-bipa-yellow block tracking-wider mb-1">Prémio a Retirar:</span>
+        <span class="text-2xl font-black text-bipa-yellow" id="premioNome">--</span>
+      </div>
+
+    </div>
+
+    <p class="text-xs text-emerald-200/70 px-4">
+      <i class="fa-solid fa-store text-bipa-brightGreen mr-1"></i> Mostre este ecrã ao funcionário para retirar os seus doces na hora!
+    </p>
+
+  </div>
+
+  <footer class="text-center text-[10px] text-gray-500 py-2">
+    Bipa&Pesa Estação Inteligente &copy; 2026
+  </footer>
+
+  <script>
+    // Recupera os parâmetros transmitidos através da URL do QR Code
+    const params = new URLSearchParams(window.location.search);
+    
+    document.getElementById('clienteNome').innerText = params.get('cliente') || 'Cliente Especial';
+    document.getElementById('materialNome').innerText = params.get('prod') || 'Material Reciclável';
+    document.getElementById('pesoTotal').innerText = `${params.get('peso') || '0.00'} kg`;
+    document.getElementById('premioNome').innerText = params.get('premio') || 'Doces';
+  </script>
+</body>
+</html>
